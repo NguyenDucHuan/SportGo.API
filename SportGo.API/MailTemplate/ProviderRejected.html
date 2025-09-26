@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông báo về hồ sơ</title>
+    <style>
+        /* (Giữ nguyên style CSS từ các template trước để đồng bộ) */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .header {
+            background-color: #dc3545;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 0.9em;
+            color: #777;
+            margin-top: 20px;
+        }
+
+        .reason-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Thông báo về hồ sơ chủ sân của bạn</h2>
+        </div>
+        <div class="content">
+            <h3>Chào {{UserName}},</h3>
+            <p>Cảm ơn bạn đã quan tâm đến việc trở thành đối tác của SportGo. Sau khi xem xét, chúng tôi rất tiếc phải thông báo rằng hồ sơ của bạn cho cơ sở <strong>{{BusinessName}}</strong> chưa thể được phê duyệt vào lúc này.</p>
+
+            <div class="reason-box">
+                <strong>Lý do từ chối:</strong>
+                <p>{{RejectReason}}</p>
+            </div>
+
+            <p>Bạn có thể cập nhật lại thông tin hồ sơ của mình và gửi lại để chúng tôi xem xét. Nếu có bất kỳ câu hỏi nào, vui lòng liên hệ với bộ phận hỗ trợ của chúng tôi.</p>
+        </div>
+        <div class="footer">
+            <p>
+                Trân trọng,
+                Đội ngũ SportGo
+            </p>
+        </div>
+    </div>
+</body>
+</html>

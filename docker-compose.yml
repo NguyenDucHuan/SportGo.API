@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  # Dịch vụ API của bạn
+  sportgo-api:
+    container_name: sportgo-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080" # Ánh xạ cổng 8080 của container ra cổng 8081 của máy host
+    environment:
+      # --- Cấu hình chung ---
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+
+      # --- Cấu hình Connection String ---
+      # Định dạng: Section__Key=Value
+      - ConnectionStrings__DefaultConnection=Server=sportgo-db;Database=SportGoDb;User Id=sa;Password=Huan123456789;TrustServerCertificate=True
+
+      # --- Cấu hình JWT (lấy từ file .env ) ---
+      - Jwt__Key=${JWT_KEY}
+
+      # --- CẤU HÌNH MAILSETTINGS ĐẦY ĐỦ ---
+      # Các giá trị không bí mật, có thể đặt trực tiếp ở đây
+      - MailSettings__Host=smtp.gmail.com
+      - MailSettings__Port=587
+      - MailSettings__SystemName=SportGo
+      - MailSettings__Sender=subiheo9999@gmail.com  # <-- SENDER ĐẶT Ở ĐÂY
+      
+      # Giá trị bí mật (lấy từ file .env)
+      - MailSettings__Password=${MAIL_PASSWORD}
+    depends_on: 
+      - sportgo-db
+    restart: on-failure # THÊM DÒNG NÀY
+
+   # Dịch vụ SQL Server
+  sportgo-db:
+    container_name: sportgo-db
+    image: mcr.microsoft.com/mssql/server:2022-latest # Giữ nguyên image
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Huan123456789
+    volumes:
+      - sportgo-db-data:/var/opt/mssql
+
+volumes:
+  sportgo-db-data:
